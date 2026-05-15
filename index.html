@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Petit Gourmet - Cardápio</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #2c1810;
+  --accent-gold: #b8956a;
+  --accent-light: #d4af76;
+  --text-dark: #1a1a1a;
+  --text-light: #f5f5f5;
+  --bg-light: #faf8f3;
+  --bg-white: #ffffff;
+  --border-color: #e8dcc8;
+  --overlay: rgba(44, 24, 16, 0.05);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Georgia', 'Garamond', serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* HEADER */
+header {
+  background: var(--bg-white);
+  border-bottom: 2px solid var(--accent-gold);
+  padding: 2.5rem 0;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+  font-size: 2rem;
+  color: var(--primary-color);
+  font-weight: normal;
+  letter-spacing: 3px;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: 0.9rem;
+  color: var(--accent-gold);
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+/* NAV */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 5px;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--accent-gold);
+  border-bottom-color: var(--accent-gold);
+}
+
+/* HERO */
+.hero {
+  padding: 4rem 0 3rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 3rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-weight: normal;
+  letter-spacing: 2px;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  font-style: italic;
+}
+
+.divider {
+  width: 60px;
+  height: 2px;
+  background: var(--accent-gold);
+  margin: 2rem auto;
+}
+
+/* SECTION TITLES */
+.section-title {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  text-align: center;
+  margin: 3rem 0 2rem;
+  font-weight: normal;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 1px;
+  background: var(--accent-gold);
+  margin: 1rem auto 0;
+}
+
+/* MENU GRID */
+.menu-section {
+  margin-bottom: 3rem;
+}
+
+.menu-items {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item:hover {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: 0 -1rem;
+  background: var(--overlay);
+}
+
+.item-content {
+  flex: 1;
+}
+
+.item-name {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  margin-bottom: 0.3rem;
+  font-weight: normal;
+}
+
+.item-description {
+  font-size: 0.95rem;
+  color: #777;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.item-ingredients {
+  font-size: 0.85rem;
+  color: #999;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ingredient-tag {
+  background: var(--border-color);
+  color: var(--text-dark);
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+}
+
+.item-price {
+  font-size: 1.3rem;
+  color: var(--accent-gold);
+  font-weight: normal;
+  margin-left: 2rem;
+  white-space: nowrap;
+  min-width: 80px;
+  text-align: right;
+}
+
+/* FILTERS */
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 2rem 0 3rem;
+}
+
+.filter-btn {
+  padding: 0.7rem 1.5rem;
+  background: var(--bg-white);
+  border: 1px solid var(--accent-gold);
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: inherit;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--accent-gold);
+  color: var(--bg-white);
+}
+
+/* ALLERGENS */
+.allergens {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.allergen {
+  font-size: 0.7rem;
+  color: #d9534f;
+  background: #f8d7da;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+/* FOOTER */
+footer {
+  background: var(--primary-color);
+  color: var(--text-light);
+  text-align: center;
+  padding: 3rem 0;
+  margin-top: 4rem;
+  border-top: 2px solid var(--accent-gold);
+}
+
+.footer-content {
+  margin-bottom: 1rem;
+}
+
+.footer-text {
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.footer-text:first-child {
+  color: var(--accent-gold);
+  margin-bottom: 0.5rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  nav {
+    gap: 1rem;
+  }
+
+  nav a {
+    font-size: 0.75rem;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .menu-item {
+    flex-direction: column;
+  }
+
+  .item-price {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 1.5rem 0;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+  }
+
+  nav {
+    gap: 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .hero {
+    padding: 2rem 0;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .menu-item:hover {
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+  }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="logo">LE PETIT GOURMET</div>
+    <p class="tagline">Classic French Cuisine</p>
+    <nav>
+      <a href="#aperitivo">Appetizers</a>
+      <a href="#principal">Main Courses</a>
+      <a href="#sobremesa">Desserts</a>
+      <a href="#bebida">Beverages</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <section class="hero">
+      <h1>Seasonal Menu</h1>
+      <p>Carefully selected dishes with fresh, premium quality ingredients</p>
+      <div class="divider"></div>
+    </section>
+
+    <section>
+      <div class="filters">
+        <button class="filter-btn active" onclick="filterMenu('all')">All</button>
+        <button class="filter-btn" onclick="filterMenu('aperitivo')">Appetizers</button>
+        <button class="filter-btn" onclick="filterMenu('principal')">Main Courses</button>
+        <button class="filter-btn" onclick="filterMenu('sobremesa')">Desserts</button>
+        <button class="filter-btn" onclick="filterMenu('bebida')">Beverages</button>
+      </div>
+
+      <div id="menuContainer"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <p class="footer-text">LE PETIT GOURMET</p>
+      <p class="footer-text">Culinary Street, 123 • São Paulo, SP</p>
+      <p class="footer-text">(11) 9999-8888 • contact@lepetitgourmet.com.br</p>
+    </div>
+    <div class="divider"></div>
+    <p class="footer-text" style="margin-top: 1.5rem; color: #ccc; font-size: 0.8rem;">© 2025 Le Petit Gourmet. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+const menuData = {
+  aperitivo: [
+    {
+      name: "Escargots à la Bourguignonne",
+      description: "Snails with garlic butter and parsley",
+      price: "R$ 48,00",
+      ingredients: ["Snail", "Butter", "Garlic", "Parsley"],
+      allergens: ["Mollusk"]
+    },
+    {
+      name: "Foie Gras Terrine",
+      description: "Goose liver served with caramelized onion confit",
+      price: "R$ 65,00",
+      ingredients: ["Foie Gras", "Onion", "Brioche"],
+      allergens: ["Gluten"]
+    },
+    {
+      name: "Pâté Maison",
+      description: "Homemade pâté with pistachios and dried mushrooms",
+      price: "R$ 38,00",
+      ingredients: ["Liver", "Pistachios", "Mushroom"],
+      allergens: []
+    }
+  ],
+  principal: [
+    {
+      name: "Coq au Vin",
+      description: "Free-range chicken braised in red wine with mushrooms and onions",
+      price: "R$ 72,00",
+      ingredients: ["Chicken", "Red Wine", "Mushroom", "Onion"],
+      allergens: ["Gluten"]
+    },
+    {
+      name: "Beef Bourguignon",
+      description: "Beef stew in red wine sauce with bacon, mushrooms and pearl onions",
+      price: "R$ 89,00",
+      ingredients: ["Beef", "Red Wine", "Bacon", "Mushroom"],
+      allergens: []
+    },
+    {
+      name: "Dover Sole Meunière",
+      description: "Atlantic sole with brown butter, hazelnuts and Sicilian lemon",
+      price: "R$ 95,00",
+      ingredients: ["Sole", "Butter", "Hazelnuts", "Lemon"],
+      allergens: ["Fish"]
+    },
+    {
+      name: "Cassoulet du Languedoc",
+      description: "White bean stew with duck confit and sausage",
+      price: "R$ 68,00",
+      ingredients: ["Beans", "Duck", "Sausage", "Garlic"],
+      allergens: ["Gluten"]
+    }
+  ],
+  sobremesa: [
+    {
+      name: "Crème Brûlée",
+      description: "Vanilla cream with caramelized sugar crust",
+      price: "R$ 28,00",
+      ingredients: ["Cream", "Vanilla", "Sugar"],
+      allergens: ["Dairy"]
+    },
+    {
+      name: "Tarte Tatin",
+      description: "Caramelized apple tart with butter caramel sauce",
+      price: "R$ 32,00",
+      ingredients: ["Apple", "Butter", "Puff Pastry"],
+      allergens: ["Gluten", "Dairy"]
+    },
+    {
+      name: "Mousse au Chocolat",
+      description: "70% dark chocolate mousse with raspberry coulis",
+      price: "R$ 24,00",
+      ingredients: ["Chocolate", "Eggs", "Raspberry"],
+      allergens: ["Eggs"]
+    }
+  ],
+  bebida: [
+    {
+      name: "Bordeaux Reserve Wine",
+      description: "Premium red from 2015, soft tannins and complex aroma",
+      price: "R$ 120,00 (bottle)",
+      ingredients: ["Cabernet Grape"],
+      allergens: ["Contains Sulfites"]
+    },
+    {
+      name: "Champagne Veuve Clicquot",
+      description: "Elegant French sparkling wine with citrus notes",
+      price: "R$ 85,00 (bottle)",
+      ingredients: ["Chardonnay Grape"],
+      allergens: ["Contains Sulfites"]
+    },
+    {
+      name: "Espresso Coffee",
+      description: "Freshly ground premium coffee beans",
+      price: "R$ 8,00",
+      ingredients: ["Coffee"],
+      allergens: []
+    }
+  ]
+};
+
+function renderMenu(category = 'all') {
+  const container = document.getElementById('menuContainer');
+  container.innerHTML = '';
+
+  let items = [];
+  if (category === 'all') {
+    items = [...menuData.aperitivo, ...menuData.principal, ...menuData.sobremesa, ...menuData.bebida];
+  } else {
+    items = menuData[category] || [];
+  }
+
+  const grouped = {
+    aperitivo: items.filter(i => menuData.aperitivo.includes(i)),
+    principal: items.filter(i => menuData.principal.includes(i)),
+    sobremesa: items.filter(i => menuData.sobremesa.includes(i)),
+    bebida: items.filter(i => menuData.bebida.includes(i))
+  };
+
+  Object.entries(grouped).forEach(([cat, categoryItems]) => {
+    if (categoryItems.length === 0) return;
+
+    const categoryTitle = {
+      aperitivo: 'Appetizers',
+      principal: 'Main Courses',
+      sobremesa: 'Desserts',
+      bebida: 'Beverages'
+    }[cat];
+
+    const section = document.createElement('div');
+    section.className = 'menu-section';
+    section.id = cat;
+
+    const title = document.createElement('h2');
+    title.className = 'section-title';
+    title.textContent = categoryTitle;
+    section.appendChild(title);
+
+    const itemsDiv = document.createElement('div');
+    itemsDiv.className = 'menu-items';
+
+    categoryItems.forEach(item => {
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'menu-item';
+      
+      let allergensHtml = '';
+      if (item.allergens.length > 0) {
+        allergensHtml = `<div class="allergens">${item.allergens.map(a => `<span class="allergen">${a}</span>`).join('')}</div>`;
+      }
+
+      itemDiv.innerHTML = `
+        <div class="item-content">
+          <div class="item-name">${item.name}</div>
+          <div class="item-description">${item.description}</div>
+          <div class="item-ingredients">
+            ${item.ingredients.map(ing => `<span class="ingredient-tag">${ing}</span>`).join('')}
+          </div>
+          ${allergensHtml}
+        </div>
+        <div class="item-price">${item.price}</div>
+      `;
+      
+      itemsDiv.appendChild(itemDiv);
+    });
+
+    section.appendChild(itemsDiv);
+    container.appendChild(section);
+  });
+}
+
+function filterMenu(category) {
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  renderMenu(category);
+}
+
+renderMenu();
+</script>
+</body>
+</html>
